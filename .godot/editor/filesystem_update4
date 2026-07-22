@@ -1,10 +1,1 @@
-res://scripts/ui/main_menu.gd
-res://scripts/player/player.gd
-res://scripts/levels/player_mechanics_demo.gd
-res://scripts/enemies/enemy.gd
-res://scripts/bosses/boss_1.gd
-res://scenes/bosses/boss_1.tscn
-res://shaders/backgrounds/mountain_dusk_auto_scroller.gdshader
-res://scenes/levels/player_mechanics_demo.tscn
-res://scripts/ui/health_hud.gd
-res://scripts/items/health_heart_pickup.gd
+res://scenes/backgrounds/mountain_dusk_auto_scroller.tscn

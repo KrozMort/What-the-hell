@@ -1,7 +1,5 @@
 extends Node2D
 
-const NEW_GAME_SCENE := "res://scenes/levels/player_mechanics_demo.tscn"
-
 @onready var music: AudioStreamPlayer = $AudioStreamPlayer
 @onready var menu: VBoxContainer = $MainMenu/Root/Menu
 @onready var title: TextureRect = $MainMenu/Root/Menu/Title
@@ -130,7 +128,7 @@ func _on_music_finished() -> void:
 
 
 func _on_new_game_pressed() -> void:
-	get_tree().change_scene_to_file(NEW_GAME_SCENE)
+	pass
 
 
 func _on_chapter_pressed() -> void:

@@ -1,28 +1,28 @@
-[gd_scene load_steps=23 format=3 uid="uid://c3idsj77kmk8h"]
+[gd_scene format=3 uid="uid://c3idsj77kmk8h"]
 
-[ext_resource type="Texture2D" uid="uid://cidgla3oqkmoa" path="res://assets/environments/mountain_dusk/layers/sky.png" id="1_m6rvc"]
-[ext_resource type="Shader" path="res://shaders/backgrounds/mountain_dusk_auto_scroller.gdshader" id="2_s8vwb"]
-[ext_resource type="Texture2D" uid="uid://bbw3l7ns3qacb" path="res://assets/environments/mountain_dusk/layers/far-clouds.png" id="3_hfew3"]
-[ext_resource type="Texture2D" uid="uid://nei8g3fblyr7" path="res://assets/environments/mountain_dusk/layers/near-clouds.png" id="4_w07ck"]
-[ext_resource type="Texture2D" uid="uid://bcnsdxg457gf4" path="res://assets/environments/mountain_dusk/layers/far-mountains.png" id="5_f3q5h"]
-[ext_resource type="Texture2D" uid="uid://cub65x0y0ym76" path="res://assets/environments/mountain_dusk/layers/mountains.png" id="6_leaik"]
-[ext_resource type="Texture2D" uid="uid://dxjs1s2ge2yl0" path="res://assets/environments/mountain_dusk/layers/trees.png" id="7_f76io"]
-[ext_resource type="AudioStream" uid="uid://lfkxxo68r08r" path="res://assets/audio/music/summer_nights.ogg" id="8_oxnix"]
-[ext_resource type="FontFile" path="res://assets/fonts/aurusenthial_gothic_soft.ttf" id="9_7imwn"]
-[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="10_4rniv"]
-[ext_resource type="Texture2D" path="res://assets/ui/what_the_hell_logo.png" id="11_xe5by"]
-[ext_resource type="Texture2D" path="res://assets/ui/main_menu_options.png" id="12_pjov2"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jv7m2"]
-shader = ExtResource("2_s8vwb")
-shader_parameter/direction = Vector2(1, 0)
-shader_parameter/speed_scale = 0.02
-shader_parameter/repeat = Vector2(1, 1)
+[ext_resource type="Texture2D" uid="uid://buw4hekrhym2d" path="res://assets/environments/mountain_dusk/layers/sky.png" id="1_m6rvc"]
+[ext_resource type="Shader" uid="uid://dton24jwshbss" path="res://shaders/backgrounds/mountain_dusk_auto_scroller.gdshader" id="2_s8vwb"]
+[ext_resource type="Texture2D" uid="uid://b8yij6io7kdr" path="res://assets/environments/mountain_dusk/layers/far-clouds.png" id="3_hfew3"]
+[ext_resource type="Texture2D" uid="uid://bqd7ilp7ul323" path="res://assets/environments/mountain_dusk/layers/near-clouds.png" id="4_w07ck"]
+[ext_resource type="Texture2D" uid="uid://dpu8uiaq4mk5f" path="res://assets/environments/mountain_dusk/layers/far-mountains.png" id="5_f3q5h"]
+[ext_resource type="Texture2D" uid="uid://ckngn7xqxqo4l" path="res://assets/environments/mountain_dusk/layers/mountains.png" id="6_leaik"]
+[ext_resource type="Texture2D" uid="uid://bh1cqnf71sxfu" path="res://assets/environments/mountain_dusk/layers/trees.png" id="7_f76io"]
+[ext_resource type="AudioStream" uid="uid://ch5yocgob2jox" path="res://assets/audio/music/summer_nights.ogg" id="8_oxnix"]
+[ext_resource type="FontFile" uid="uid://c42y8h71b4fr3" path="res://assets/fonts/aurusenthial_gothic_soft.ttf" id="9_7imwn"]
+[ext_resource type="Script" uid="uid://c3bmw7j3clgpc" path="res://scripts/ui/main_menu.gd" id="10_4rniv"]
+[ext_resource type="Texture2D" uid="uid://1rwfs6l6evqi" path="res://assets/ui/what_the_hell_logo.png" id="11_xe5by"]
+[ext_resource type="Texture2D" uid="uid://rteb2o1jhr7i" path="res://assets/ui/main_menu_options.png" id="12_pjov2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sky"]
 shader = ExtResource("2_s8vwb")
 shader_parameter/direction = Vector2(0, 0)
 shader_parameter/speed_scale = 0.0
+shader_parameter/repeat = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jv7m2"]
+shader = ExtResource("2_s8vwb")
+shader_parameter/direction = Vector2(1, 0)
+shader_parameter/speed_scale = 0.02
 shader_parameter/repeat = Vector2(1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qattk"]
@@ -65,58 +65,58 @@ region = Rect2(120, 785, 800, 260)
 atlas = ExtResource("12_pjov2")
 region = Rect2(210, 1060, 650, 340)
 
-[node name="AutoScroller" type="Node2D"]
+[node name="AutoScroller" type="Node2D" unique_id=2144785262]
 script = ExtResource("10_4rniv")
 
-[node name="BackFixedTuxture" type="TextureRect" parent="."]
+[node name="BackFixedTuxture" type="TextureRect" parent="." unique_id=1827635915]
 material = SubResource("ShaderMaterial_sky")
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 1600.0
+offset_bottom = 900.0
 texture = ExtResource("1_m6rvc")
 stretch_mode = 1
 
-[node name="TextureRectFarClouds" type="TextureRect" parent="."]
+[node name="TextureRectFarClouds" type="TextureRect" parent="." unique_id=199997428]
 material = SubResource("ShaderMaterial_jv7m2")
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 1600.0
+offset_bottom = 900.0
 texture = ExtResource("3_hfew3")
 stretch_mode = 1
 
-[node name="TextureRectNearClouds" type="TextureRect" parent="."]
+[node name="TextureRectNearClouds" type="TextureRect" parent="." unique_id=1145866472]
 material = SubResource("ShaderMaterial_qattk")
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 1600.0
+offset_bottom = 900.0
 texture = ExtResource("4_w07ck")
 stretch_mode = 1
 
-[node name="TextureRectFarMountains" type="TextureRect" parent="."]
+[node name="TextureRectFarMountains" type="TextureRect" parent="." unique_id=13674868]
 material = SubResource("ShaderMaterial_maog4")
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 1600.0
+offset_bottom = 900.0
 texture = ExtResource("5_f3q5h")
 stretch_mode = 1
 
-[node name="TextureRectMountains" type="TextureRect" parent="."]
+[node name="TextureRectMountains" type="TextureRect" parent="." unique_id=757043489]
 material = SubResource("ShaderMaterial_cpwus")
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 1600.0
+offset_bottom = 900.0
 texture = ExtResource("6_leaik")
 stretch_mode = 1
 
-[node name="TextureRectTrees" type="TextureRect" parent="."]
+[node name="TextureRectTrees" type="TextureRect" parent="." unique_id=459597163]
 material = SubResource("ShaderMaterial_vc8l8")
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 1600.0
+offset_bottom = 900.0
 texture = ExtResource("7_f76io")
 stretch_mode = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1692425534]
 stream = ExtResource("8_oxnix")
 autoplay = true
 
-[node name="MainMenu" type="CanvasLayer" parent="."]
+[node name="MainMenu" type="CanvasLayer" parent="." unique_id=844424373]
 
-[node name="Root" type="Control" parent="MainMenu"]
+[node name="Root" type="Control" parent="MainMenu" unique_id=178651401]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,7 +124,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Shade" type="ColorRect" parent="MainMenu/Root"]
+[node name="Shade" type="ColorRect" parent="MainMenu/Root" unique_id=1459305160]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -133,16 +133,15 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.06, 0.035, 0.08, 0.24)
 
-[node name="Menu" type="VBoxContainer" parent="MainMenu/Root"]
+[node name="Menu" type="VBoxContainer" parent="MainMenu/Root" unique_id=1476403986]
 layout_mode = 1
 offset_left = 112.0
 offset_top = 40.5
 offset_right = 1488.0
 offset_bottom = 850.5
 theme_override_constants/separation = 10
-alignment = 0
 
-[node name="Title" type="TextureRect" parent="MainMenu/Root/Menu"]
+[node name="Title" type="TextureRect" parent="MainMenu/Root/Menu" unique_id=278290946]
 custom_minimum_size = Vector2(1120, 263.2)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -150,24 +149,24 @@ texture = ExtResource("11_xe5by")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Subtitle" type="Label" parent="MainMenu/Root/Menu"]
+[node name="Subtitle" type="Label" parent="MainMenu/Root/Menu" unique_id=2080315739]
+custom_minimum_size = Vector2(1376, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.79, 0.66, 1)
 theme_override_colors/font_shadow_color = Color(0.11, 0.025, 0.075, 1)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("9_7imwn")
-custom_minimum_size = Vector2(1376, 0)
 theme_override_font_sizes/font_size = 18
 text = " "
 horizontal_alignment = 1
 
-[node name="Buttons" type="Control" parent="MainMenu/Root/Menu"]
+[node name="Buttons" type="Control" parent="MainMenu/Root/Menu" unique_id=1358899387]
 custom_minimum_size = Vector2(420, 483)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="NewGameArt" type="TextureRect" parent="MainMenu/Root/Menu/Buttons"]
+[node name="NewGameArt" type="TextureRect" parent="MainMenu/Root/Menu/Buttons" unique_id=1960427812]
 layout_mode = 1
 offset_left = 8.4
 offset_top = 9.66
@@ -177,7 +176,7 @@ texture = SubResource("AtlasTexture_new_game")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ChapterArt" type="TextureRect" parent="MainMenu/Root/Menu/Buttons"]
+[node name="ChapterArt" type="TextureRect" parent="MainMenu/Root/Menu/Buttons" unique_id=122164924]
 layout_mode = 1
 offset_left = 63.0
 offset_top = 130.41
@@ -187,7 +186,7 @@ texture = SubResource("AtlasTexture_chapter")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CreditsArt" type="TextureRect" parent="MainMenu/Root/Menu/Buttons"]
+[node name="CreditsArt" type="TextureRect" parent="MainMenu/Root/Menu/Buttons" unique_id=538779204]
 layout_mode = 1
 offset_left = 58.8
 offset_top = 251.16
@@ -197,7 +196,7 @@ texture = SubResource("AtlasTexture_credits")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ExitArt" type="TextureRect" parent="MainMenu/Root/Menu/Buttons"]
+[node name="ExitArt" type="TextureRect" parent="MainMenu/Root/Menu/Buttons" unique_id=376454516]
 layout_mode = 1
 offset_left = 99.0
 offset_top = 362.25
@@ -207,38 +206,34 @@ texture = SubResource("AtlasTexture_exit")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="NewGame" type="Button" parent="MainMenu/Root/Menu/Buttons"]
+[node name="NewGame" type="Button" parent="MainMenu/Root/Menu/Buttons" unique_id=1484036175]
 layout_mode = 1
 offset_left = 8.4
 offset_top = 9.66
 offset_right = 411.6
 offset_bottom = 106.26
-text = ""
 flat = true
 
-[node name="Chapter" type="Button" parent="MainMenu/Root/Menu/Buttons"]
+[node name="Chapter" type="Button" parent="MainMenu/Root/Menu/Buttons" unique_id=1179780613]
 layout_mode = 1
 offset_left = 63.0
 offset_top = 130.41
 offset_right = 357.0
 offset_bottom = 227.01
-text = ""
 flat = true
 
-[node name="Credits" type="Button" parent="MainMenu/Root/Menu/Buttons"]
+[node name="Credits" type="Button" parent="MainMenu/Root/Menu/Buttons" unique_id=238320849]
 layout_mode = 1
 offset_left = 58.8
 offset_top = 251.16
 offset_right = 361.2
 offset_bottom = 347.76
-text = ""
 flat = true
 
-[node name="Exit" type="Button" parent="MainMenu/Root/Menu/Buttons"]
+[node name="Exit" type="Button" parent="MainMenu/Root/Menu/Buttons" unique_id=225871564]
 layout_mode = 1
 offset_left = 99.0
 offset_top = 362.25
 offset_right = 321.0
 offset_bottom = 478.17
-text = ""
 flat = true
