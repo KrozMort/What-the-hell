@@ -1,0 +1,9 @@
+ARREGLO DE BARRAS DE VIDA Y RESISTENCIA
+
+- Se corrigió el modo de estiramiento de las texturas: ya no se repiten en mosaico.
+- Se activó filtrado nearest para conservar el pixel art nítido.
+- Se fijó la altura de cada recorte al actualizar vida/resistencia para evitar deformaciones.
+
+Archivos modificados:
+- scenes/levels/player_mechanics_demo.tscn
+- scripts/levels/player_mechanics_demo.gd
