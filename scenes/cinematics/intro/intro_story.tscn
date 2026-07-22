@@ -1,0 +1,658 @@
+[gd_scene format=3 uid="uid://d4gx4ele2h4gn"]
+
+[ext_resource type="Texture2D" uid="uid://dk834jix4kqdp" path="res://Final/Background_0.png" id="1_sky"]
+[ext_resource type="Texture2D" uid="uid://cdr2n3vx4maaj" path="res://Final/Background_1.png" id="2_graveyard"]
+[ext_resource type="Texture2D" uid="uid://d2invj83hwfar" path="res://Final/Salt.png" id="3_statue"]
+[ext_resource type="Texture2D" uid="uid://bcrtubxeumeoc" path="res://Final/Tiles.png" id="4_tiles"]
+[ext_resource type="FontFile" uid="uid://c42y8h71b4fr3" path="res://assets/fonts/aurusenthial_gothic_soft.ttf" id="6_font"]
+[ext_resource type="Script" uid="uid://brwq28f44dtit" path="res://scenes/cinematics/intro/intro_story.gd" id="7_script"]
+[ext_resource type="Texture2D" uid="uid://c0ocsqnv0mtwg" path="res://Final/piso.png" id="8_ground"]
+[ext_resource type="AudioStream" uid="uid://brlwhnu0mgwqw" path="res://assets/audio/ambience/wind.mp3" id="9_wind"]
+[ext_resource type="AudioStream" uid="uid://currxgrhgru26" path="res://assets/audio/ambience/crickets.mp3" id="10_crickets"]
+[ext_resource type="AudioStream" uid="uid://b3ake436reckv" path="res://assets/audio/ambience/low_drone.mp3" id="11_drone"]
+[ext_resource type="AudioStream" uid="uid://bmq2fxxwjr2k6" path="res://assets/audio/sfx/bell.mp3" id="12_bell"]
+[ext_resource type="AudioStream" uid="uid://byt03bllj58yr" path="res://assets/audio/sfx/breath.mp3" id="13_breath"]
+[ext_resource type="AudioStream" uid="uid://bhqrbcpa1kyw4" path="res://assets/audio/sfx/footsteps_stone.mp3" id="14_footsteps"]
+[ext_resource type="Script" uid="uid://cuko4eb7pmbj7" path="res://scripts/util/drifting_sprite.gd" id="15_drift"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_multiply"]
+blend_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_ao"]
+colors = PackedColorArray(0, 0, 0, 0.55, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ao"]
+gradient = SubResource("Gradient_ao")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mound"]
+atlas = ExtResource("4_tiles")
+region = Rect2(160, 146, 160, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dirt"]
+atlas = ExtResource("4_tiles")
+region = Rect2(128, 17, 96, 47)
+
+[sub_resource type="Gradient" id="Gradient_fog"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.75, 0.82, 0.9, 0, 0.75, 0.82, 0.9, 0.22, 0.75, 0.82, 0.9, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fog"]
+gradient = SubResource("Gradient_fog")
+width = 512
+height = 128
+
+[sub_resource type="Gradient" id="Gradient_dust"]
+colors = PackedColorArray(0.85, 0.88, 0.95, 0.8, 0.85, 0.88, 0.95, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dust"]
+gradient = SubResource("Gradient_dust")
+width = 8
+height = 8
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dust"]
+emission_shape = 3
+emission_box_extents = Vector3(1400, 10, 1)
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 2.0
+initial_velocity_max = 8.0
+gravity = Vector3(0, -4, 0)
+scale_min = 0.5
+scale_max = 1.4
+color = Color(0.85, 0.88, 0.95, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_rain"]
+colors = PackedColorArray(0.75, 0.82, 0.95, 0, 0.75, 0.82, 0.95, 0.65, 0.75, 0.82, 0.95, 0)
+offsets = PackedFloat32Array(0, 0.5, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rain"]
+gradient = SubResource("Gradient_rain")
+width = 4
+height = 48
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rain"]
+emission_shape = 3
+emission_box_extents = Vector3(1500, 10, 1)
+direction = Vector3(0.12, 1, 0)
+spread = 2.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 900.0
+initial_velocity_max = 1200.0
+scale_min = 0.8
+scale_max = 1.3
+color = Color(0.8, 0.85, 0.95, 0.55)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_glow"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_glow"]
+colors = PackedColorArray(0.45, 0.7, 1, 0.9, 0.45, 0.7, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_glow"]
+gradient = SubResource("Gradient_glow")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hole"]
+atlas = ExtResource("4_tiles")
+region = Rect2(197, 226, 154, 148)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gate"]
+atlas = ExtResource("4_tiles")
+region = Rect2(0, 243, 160, 141)
+
+[node name="IntroStory" type="Node2D" unique_id=1529079322]
+script = ExtResource("7_script")
+
+[node name="Tint" type="CanvasModulate" parent="." unique_id=997587490]
+color = Color(0.55, 0.68, 0.92, 1)
+
+[node name="Parallax" type="ParallaxBackground" parent="." unique_id=288684890]
+
+[node name="SkyLayer" type="ParallaxLayer" parent="Parallax" unique_id=1063372614]
+motion_scale = Vector2(0, 0)
+
+[node name="Sky" type="Sprite2D" parent="Parallax/SkyLayer" unique_id=2062140824]
+position = Vector2(798, 436)
+scale = Vector2(2.1635, 2.1635)
+texture = ExtResource("1_sky")
+
+[node name="GraveyardLayer" type="ParallaxLayer" parent="Parallax" unique_id=665662662]
+motion_scale = Vector2(0, 0)
+
+[node name="Graveyard" type="Sprite2D" parent="Parallax/GraveyardLayer" unique_id=178318257]
+position = Vector2(800, 470)
+scale = Vector2(2.1635, 2.1635)
+texture = ExtResource("2_graveyard")
+
+[node name="ForegroundLayer" type="ParallaxLayer" parent="Parallax" unique_id=1299610858]
+
+[node name="Foreground" type="Node2D" parent="Parallax/ForegroundLayer" unique_id=1292146105]
+z_index = 10
+
+[node name="World" type="Node2D" parent="." unique_id=82909061]
+
+[node name="Ground" type="TextureRect" parent="World" unique_id=1889973501]
+offset_left = 96.0
+offset_top = 870.0
+offset_right = 2946.0
+offset_bottom = 1218.0
+texture = ExtResource("8_ground")
+stretch_mode = 2
+
+[node name="Ground5" type="TextureRect" parent="World" unique_id=483466526]
+offset_left = -418.0
+offset_top = 870.0
+offset_right = 2432.0
+offset_bottom = 1218.0
+texture = ExtResource("8_ground")
+stretch_mode = 2
+
+[node name="Ground6" type="TextureRect" parent="World" unique_id=190328331]
+offset_left = -934.0
+offset_top = 873.0
+offset_right = 1916.0
+offset_bottom = 1221.0
+texture = ExtResource("8_ground")
+stretch_mode = 2
+
+[node name="Ground2" type="TextureRect" parent="World" unique_id=680261209]
+offset_left = 1277.0
+offset_top = 864.0
+offset_right = 1794.0
+offset_bottom = 1212.0
+texture = ExtResource("8_ground")
+stretch_mode = 2
+
+[node name="Ground3" type="TextureRect" parent="World" unique_id=1873681414]
+offset_left = 836.0
+offset_top = 872.0
+offset_right = 3686.0
+offset_bottom = 1220.0
+texture = ExtResource("8_ground")
+stretch_mode = 2
+
+[node name="Ground4" type="TextureRect" parent="World" unique_id=1938954101]
+offset_left = 552.0
+offset_top = 873.0
+offset_right = 3402.0
+offset_bottom = 1221.0
+texture = ExtResource("8_ground")
+stretch_mode = 2
+
+[node name="Ground7" type="TextureRect" parent="World" unique_id=739692551]
+offset_left = 1789.0
+offset_top = 868.0
+offset_right = 4639.0
+offset_bottom = 1216.0
+texture = ExtResource("8_ground")
+stretch_mode = 2
+
+[node name="Ground8" type="TextureRect" parent="World" unique_id=75684686]
+offset_left = 2282.0
+offset_top = 868.0
+offset_right = 5132.0
+offset_bottom = 1216.0
+texture = ExtResource("8_ground")
+stretch_mode = 2
+
+[node name="GroundShadow" type="Sprite2D" parent="World" unique_id=1827772064]
+z_index = 1
+material = SubResource("CanvasItemMaterial_multiply")
+position = Vector2(728.00006, 487)
+scale = Vector2(44.5, 0.9)
+texture = SubResource("GradientTexture2D_ao")
+
+[node name="Blend" type="Node2D" parent="World" unique_id=1490411030]
+
+[node name="Mound1" type="Sprite2D" parent="World/Blend" unique_id=476152683]
+visible = false
+z_index = 2
+position = Vector2(-600, 780)
+rotation = 0.034906585
+scale = Vector2(1.7, 1.6)
+texture = SubResource("AtlasTexture_mound")
+
+[node name="Mound2" type="Sprite2D" parent="World/Blend" unique_id=1945856430]
+visible = false
+z_index = 2
+position = Vector2(-230, 792)
+rotation = -0.05235988
+scale = Vector2(-1.6, 1.5)
+texture = SubResource("AtlasTexture_mound")
+
+[node name="Mound5" type="Sprite2D" parent="World/Blend" unique_id=1143847078]
+z_index = 2
+position = Vector2(188.43484, 997.9754)
+rotation = 0.04363323
+scale = Vector2(1.892929, 1.6)
+
+[node name="Dirt1" type="Sprite2D" parent="World/Blend" unique_id=1795458777]
+visible = false
+z_index = 2
+position = Vector2(-400, 900)
+rotation = 0.06981317
+scale = Vector2(1.3, 1.3)
+texture = SubResource("AtlasTexture_dirt")
+
+[node name="Dirt2" type="Sprite2D" parent="World/Blend" unique_id=1153853561]
+visible = false
+z_index = 2
+position = Vector2(20, 940)
+rotation = -0.10471976
+scale = Vector2(-1.5, 1.4)
+texture = SubResource("AtlasTexture_dirt")
+
+[node name="Dirt3" type="Sprite2D" parent="World/Blend" unique_id=741003398]
+visible = false
+z_index = 2
+position = Vector2(430, 870)
+rotation = 0.05235988
+scale = Vector2(1.4, 1.5)
+texture = SubResource("AtlasTexture_dirt")
+
+[node name="Dirt4" type="Sprite2D" parent="World/Blend" unique_id=482521734]
+visible = false
+z_index = 2
+position = Vector2(830, 960)
+rotation = -0.06981317
+scale = Vector2(-1.3, 1.2)
+texture = SubResource("AtlasTexture_dirt")
+
+[node name="Dirt5" type="Sprite2D" parent="World/Blend" unique_id=1206796]
+visible = false
+z_index = 2
+position = Vector2(1240, 890)
+rotation = 0.08726646
+scale = Vector2(1.5, 1.4)
+texture = SubResource("AtlasTexture_dirt")
+
+[node name="Dirt6" type="Sprite2D" parent="World/Blend" unique_id=878057127]
+visible = false
+z_index = 2
+position = Vector2(1640, 950)
+rotation = -0.05235988
+scale = Vector2(-1.3, 1.3)
+texture = SubResource("AtlasTexture_dirt")
+
+[node name="Atmosphere" type="Node2D" parent="World" unique_id=1702482095]
+
+[node name="Fog1" type="Sprite2D" parent="World/Atmosphere" unique_id=875289048]
+visible = false
+z_index = 5
+position = Vector2(-100, 920)
+scale = Vector2(4.5, 1.4)
+texture = SubResource("GradientTexture2D_fog")
+script = ExtResource("15_drift")
+amplitude = 80.0
+speed = 0.12
+
+[node name="Fog2" type="Sprite2D" parent="World/Atmosphere" unique_id=1499422630]
+visible = false
+z_index = 5
+position = Vector2(900, 890)
+scale = Vector2(4.8, 1.5)
+texture = SubResource("GradientTexture2D_fog")
+script = ExtResource("15_drift")
+amplitude = 90.0
+speed = 0.09
+
+[node name="Fog3" type="Sprite2D" parent="World/Atmosphere" unique_id=486653864]
+visible = false
+z_index = 5
+position = Vector2(1900, 900)
+scale = Vector2(4.5, 1.4)
+texture = SubResource("GradientTexture2D_fog")
+script = ExtResource("15_drift")
+amplitude = 85.0
+speed = 0.1
+
+[node name="Dust" type="GPUParticles2D" parent="World/Atmosphere" unique_id=1821731750]
+visible = false
+z_index = 6
+position = Vector2(540, 719)
+amount = 24
+texture = SubResource("GradientTexture2D_dust")
+lifetime = 10.0
+preprocess = 6.0
+process_material = SubResource("ParticleProcessMaterial_dust")
+
+[node name="Rain" type="GPUParticles2D" parent="World/Atmosphere"]
+emitting = false
+z_index = 8
+position = Vector2(775, -500)
+amount = 220
+texture = SubResource("GradientTexture2D_rain")
+lifetime = 1.6
+preprocess = 1.6
+speed_scale = 1.0
+process_material = SubResource("ParticleProcessMaterial_rain")
+
+[node name="Statue" type="Sprite2D" parent="World" unique_id=1703575743]
+position = Vector2(627, 650)
+scale = Vector2(2, 2)
+texture = ExtResource("3_statue")
+
+[node name="Statue2" type="Sprite2D" parent="World" unique_id=1924343737]
+position = Vector2(1517, 646)
+scale = Vector2(2, 2)
+texture = ExtResource("3_statue")
+
+[node name="Statue9" type="Sprite2D" parent="World" unique_id=1935900627]
+position = Vector2(2521, 649)
+scale = Vector2(2, 2)
+texture = ExtResource("3_statue")
+
+[node name="Statue10" type="Sprite2D" parent="World" unique_id=274416455]
+position = Vector2(2197, 651)
+scale = Vector2(2, 2)
+texture = ExtResource("3_statue")
+
+[node name="Statue11" type="Sprite2D" parent="World" unique_id=2091499913]
+position = Vector2(1859, 641)
+scale = Vector2(2, 2)
+texture = ExtResource("3_statue")
+
+[node name="Statue3" type="Sprite2D" parent="World" unique_id=1982555597]
+position = Vector2(350, 646)
+scale = Vector2(2, 2)
+texture = ExtResource("3_statue")
+
+[node name="Statue6" type="Sprite2D" parent="World" unique_id=18475943]
+position = Vector2(-620, 646)
+scale = Vector2(2, 2)
+texture = ExtResource("3_statue")
+
+[node name="Statue7" type="Sprite2D" parent="World" unique_id=1043316163]
+position = Vector2(-285, 646)
+scale = Vector2(2, 2)
+texture = ExtResource("3_statue")
+
+[node name="Statue8" type="Sprite2D" parent="World" unique_id=1372665658]
+position = Vector2(47, 648)
+scale = Vector2(2, 2)
+texture = ExtResource("3_statue")
+
+[node name="Statue4" type="Sprite2D" parent="World" unique_id=1130543314]
+position = Vector2(1238, 650)
+scale = Vector2(2, 2)
+texture = ExtResource("3_statue")
+
+[node name="Statue5" type="Sprite2D" parent="World" unique_id=477956077]
+position = Vector2(951, 652)
+scale = Vector2(2, 2)
+texture = ExtResource("3_statue")
+
+[node name="Glow" type="Sprite2D" parent="World" unique_id=229671476]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(1699, 691)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow5" type="Sprite2D" parent="World" unique_id=1240767485]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(1302, 704)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow6" type="Sprite2D" parent="World" unique_id=1479746236]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(1083, 728)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow8" type="Sprite2D" parent="World" unique_id=1906932661]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(412, 705)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow11" type="Sprite2D" parent="World" unique_id=1448596921]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(505, 713)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow9" type="Sprite2D" parent="World" unique_id=1049907314]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(2302, 718)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow10" type="Sprite2D" parent="World" unique_id=1619644093]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(2053, 702)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow2" type="Sprite2D" parent="World" unique_id=1950667127]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(1489, 698)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow3" type="Sprite2D" parent="World" unique_id=227586011]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(1864, 669)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow7" type="Sprite2D" parent="World" unique_id=632266288]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(807, 702)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow4" type="Sprite2D" parent="World" unique_id=349669372]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(271, 698)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow12" type="Sprite2D" parent="World" unique_id=1651349344]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(-393, 685)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow15" type="Sprite2D" parent="World" unique_id=684129181]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(-764, 732)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow16" type="Sprite2D" parent="World" unique_id=2107166838]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(-616, 729)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow13" type="Sprite2D" parent="World" unique_id=502772529]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(-141, 719)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Glow14" type="Sprite2D" parent="World" unique_id=2049841054]
+z_index = -2
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(48, 698)
+texture = SubResource("GradientTexture2D_glow")
+
+[node name="Hole" type="Sprite2D" parent="World" unique_id=1350569803]
+z_index = -1
+position = Vector2(1547, 793)
+scale = Vector2(2.1363642, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Hole6" type="Sprite2D" parent="World" unique_id=961192382]
+z_index = -1
+position = Vector2(149, 798)
+scale = Vector2(2.1363642, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Hole11" type="Sprite2D" parent="World" unique_id=1828185044]
+z_index = -1
+position = Vector2(-684, 806)
+scale = Vector2(2.1363642, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Hole12" type="Sprite2D" parent="World" unique_id=948335020]
+z_index = -1
+position = Vector2(-393, 804)
+scale = Vector2(2.1363642, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Hole13" type="Sprite2D" parent="World" unique_id=907065198]
+z_index = -1
+position = Vector2(-132, 804)
+scale = Vector2(2.1363642, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Hole7" type="Sprite2D" parent="World" unique_id=1124779460]
+z_index = -1
+position = Vector2(2602, 793)
+scale = Vector2(2.1363642, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Hole8" type="Sprite2D" parent="World" unique_id=402854320]
+z_index = -1
+position = Vector2(2302, 795)
+scale = Vector2(2.1363642, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Hole9" type="Sprite2D" parent="World" unique_id=885866971]
+z_index = -1
+position = Vector2(2024, 798)
+scale = Vector2(2.1363642, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Hole10" type="Sprite2D" parent="World" unique_id=539899657]
+z_index = -1
+position = Vector2(1775.0001, 780)
+scale = Vector2(2.1363642, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Hole4" type="Sprite2D" parent="World" unique_id=1153040045]
+z_index = -1
+position = Vector2(713, 811)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Hole5" type="Sprite2D" parent="World" unique_id=1570883737]
+z_index = -1
+position = Vector2(435, 790)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Hole3" type="Sprite2D" parent="World" unique_id=236732239]
+z_index = -1
+position = Vector2(988, 809)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="Hole2" type="Sprite2D" parent="World" unique_id=1976087687]
+z_index = -1
+position = Vector2(1261, 799)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_hole")
+
+[node name="GateFence" type="Sprite2D" parent="World" unique_id=2099794851]
+visible = false
+position = Vector2(1380, 610)
+scale = Vector2(2.4, 2.4)
+texture = SubResource("AtlasTexture_gate")
+
+[node name="Player" type="AnimatedSprite2D" parent="World" unique_id=684079836]
+position = Vector2(125, 806)
+scale = Vector2(3, 3)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=705570426]
+position = Vector2(320, 220)
+zoom = Vector2(1.15, 1.15)
+limit_left = -650
+limit_top = -350
+limit_right = 2200
+limit_bottom = 950
+
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=1484411768]
+stream = ExtResource("9_wind")
+volume_db = -6.0
+
+[node name="Crickets" type="AudioStreamPlayer" parent="." unique_id=1277797003]
+stream = ExtResource("10_crickets")
+volume_db = -10.0
+
+[node name="Bell" type="AudioStreamPlayer" parent="." unique_id=1810419521]
+stream = ExtResource("12_bell")
+volume_db = -4.0
+
+[node name="Breath" type="AudioStreamPlayer" parent="." unique_id=1830976784]
+stream = ExtResource("13_breath")
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="." unique_id=1227073356]
+stream = ExtResource("14_footsteps")
+volume_db = 4.0
+
+[node name="Pad" type="AudioStreamPlayer" parent="." unique_id=478768993]
+stream = ExtResource("11_drone")
+volume_db = -8.0
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=44729975]
+
+[node name="Fade" type="ColorRect" parent="UI" unique_id=1359639334]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -102.0
+offset_top = -98.0
+offset_right = 33.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Subtitle" type="Label" parent="UI" unique_id=1556307998]
+custom_minimum_size = Vector2(400, 0)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 82.0
+offset_top = -333.0
+offset_right = -78.0
+offset_bottom = -213.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.95, 0.93, 0.88, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="SkipHint" type="Label" parent="UI" unique_id=2013347619]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -260.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 50.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=334806587]

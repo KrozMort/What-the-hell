@@ -1,0 +1,6 @@
+res://scripts/ui/main_menu.gd
+res://scripts/story/intro_story.gd
+res://scenes/cinematics/intro/intro_story.gd
+res://scenes/cinematics/intro/intro_story.tscn
+res://shaders/backgrounds/mountain_dusk_auto_scroller.gdshader
+res://scripts/util/spritesheet_frames.gd
