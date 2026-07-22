@@ -12,10 +12,11 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/mushroom.tscn" id="10_mushroom"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/skeleton.tscn" id="11_skeleton"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/flying_eye.tscn" id="12_flying_eye"]
-[ext_resource type="Texture2D" path="res://assets/ui/health/1-Hearth_Bar_Outline.png" id="13_health_outline"]
-[ext_resource type="Texture2D" path="res://assets/ui/health/1-Hearth_Bar_Fill.png" id="14_health_fill"]
-[ext_resource type="Texture2D" path="res://assets/ui/health/2-Stamin_Bar_Outline.png" id="15_stamina_outline"]
-[ext_resource type="Texture2D" path="res://assets/ui/health/2-Stamin_Bar_Fill.png" id="16_stamina_fill"]
+[ext_resource type="Texture2D" uid="uid://s4stjmme5s1l" path="res://assets/ui/health/1-Hearth_Bar_Outline.png" id="13_health_outline"]
+[ext_resource type="Texture2D" uid="uid://bjl76h2dpg4te" path="res://assets/ui/health/1-Hearth_Bar_Fill.png" id="14_health_fill"]
+[ext_resource type="Texture2D" uid="uid://5bxw0s4nxljf" path="res://assets/ui/health/2-Stamin_Bar_Outline.png" id="15_stamina_outline"]
+[ext_resource type="Texture2D" uid="uid://brbijqry2mufp" path="res://assets/ui/health/2-Stamin_Bar_Fill.png" id="16_stamina_fill"]
+[ext_resource type="AudioStream" uid="uid://c1f4y0jv8bmyr" path="res://assets/audio/ambience/tutorial_ambience.mp3" id="17_ambience"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
 size = Vector2(4200, 100)
@@ -40,6 +41,21 @@ corner_radius_bottom_left = 10
 
 [node name="PlayerMechanicsDemo" type="Node2D" unique_id=1200316555]
 script = ExtResource("1_level")
+
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=378818499]
+stream = ExtResource("17_ambience")
+
+[node name="Transition" type="CanvasLayer" parent="." unique_id=1242498521]
+layer = 20
+
+[node name="Fade" type="ColorRect" parent="Transition" unique_id=238860948]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=621153175]
 layer = -10
@@ -73,8 +89,10 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="Trees" type="TextureRect" parent="Background" unique_id=1864784249]
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_left = 21.0
+offset_top = -200.0
+offset_right = 1941.0
+offset_bottom = 880.0
 texture = ExtResource("7_trees")
 expand_mode = 1
 stretch_mode = 6
@@ -142,24 +160,45 @@ position = Vector2(628, 419)
 
 [node name="Interface" type="CanvasLayer" parent="." unique_id=1863389708]
 
+[node name="WelcomeMessage" type="Label" parent="Interface" unique_id=408359851]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 129.0
+offset_top = -50.0
+offset_right = 129.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.6, 1)
+theme_override_colors/font_shadow_color = Color(0.08, 0.02, 0.03, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("8_font")
+theme_override_font_sizes/font_size = 48
+text = "Bienvenido al tutorial"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Objective" type="Label" parent="Interface" unique_id=816158561]
-offset_left = 950.0
-offset_top = 36.0
-offset_right = 1560.0
-offset_bottom = 72.0
+offset_left = 691.0
+offset_top = 26.0
+offset_right = 1568.0
+offset_bottom = 79.0
 theme_override_colors/font_color = Color(1, 0.82, 0.42, 1)
 theme_override_colors/font_shadow_color = Color(0.08, 0.01, 0.03, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 theme_override_fonts/font = ExtResource("8_font")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 18
 text = "OBJETIVO: Derrota a todos los enemigos"
 horizontal_alignment = 2
 
 [node name="Instructions" type="PanelContainer" parent="Interface" unique_id=137710501]
-offset_left = 430.0
+offset_left = 730.0
 offset_top = 78.0
-offset_right = 1150.0
+offset_right = 1450.0
 offset_bottom = 232.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
@@ -174,7 +213,7 @@ theme_override_constants/margin_bottom = 12
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.88, 0.72, 1)
 theme_override_fonts/font = ExtResource("8_font")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 16
 text = "A / D o flechas: Caminar     ESPACIO: Saltar
 SHIFT: Esquivar
 CLIC IZQUIERDO: Ataque normal
@@ -182,15 +221,12 @@ CLIC DERECHO: Poder especial     ESC: Volver"
 
 [node name="Hud" type="Control" parent="Interface" unique_id=1542982012]
 layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+anchors_preset = 0
 offset_left = 24.0
 offset_top = 14.0
 offset_right = 420.0
 offset_bottom = 188.0
+grow_horizontal = 2
 mouse_filter = 2
 
 [node name="Bars" type="VBoxContainer" parent="Interface/Hud" unique_id=1128937727]
@@ -209,12 +245,10 @@ text = "VIDA"
 [node name="HealthBar" type="TextureProgressBar" parent="Interface/Hud/Bars" unique_id=1699629937]
 custom_minimum_size = Vector2(370, 36)
 layout_mode = 2
+value = 100.0
+nine_patch_stretch = true
 texture_under = ExtResource("13_health_outline")
 texture_progress = ExtResource("14_health_fill")
-nine_patch_stretch = true
-show_percentage = false
-max_value = 100.0
-value = 100.0
 
 [node name="StaminaLabel" type="Label" parent="Interface/Hud/Bars" unique_id=2028223926]
 layout_mode = 2
@@ -226,9 +260,7 @@ text = "ESTAMINA"
 [node name="StaminaBar" type="TextureProgressBar" parent="Interface/Hud/Bars" unique_id=518056966]
 custom_minimum_size = Vector2(370, 36)
 layout_mode = 2
+value = 100.0
+nine_patch_stretch = true
 texture_under = ExtResource("15_stamina_outline")
 texture_progress = ExtResource("16_stamina_fill")
-nine_patch_stretch = true
-show_percentage = false
-max_value = 100.0
-value = 100.0

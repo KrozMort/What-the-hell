@@ -17,3 +17,7 @@ position = Vector2(0, -21)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_enemy")
+
+[node name="AttackSfx" type="AudioStreamPlayer" parent="."]
+
+[node name="StatusSfx" type="AudioStreamPlayer" parent="."]

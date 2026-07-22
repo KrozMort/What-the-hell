@@ -1,9 +1,9 @@
 extends Node2D
 
 const PLAYER_SPRITE_DIR := "res://assets/characters/player/main/spritesheets/"
-const FRAME_WIDTH := 60
+const FRAME_WIDTH := 120
 const FRAME_HEIGHT := 80
-const NEXT_SCENE := "res://scenes/levels/level_01.tscn"
+const NEXT_SCENE := "res://scenes/levels/player_mechanics_demo.tscn"
 
 const FINAL_DIR := "res://Final/"
 const FOREGROUND_TEXTURE_WIDTH := 352.0

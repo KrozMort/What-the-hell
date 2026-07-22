@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" path="res://assets/characters/enemies/flying_eye/attack_alt.png" id="4_attack_alt"]
 [ext_resource type="Texture2D" path="res://assets/characters/enemies/flying_eye/hurt.png" id="5_hurt"]
 [ext_resource type="Texture2D" path="res://assets/characters/enemies/flying_eye/death.png" id="6_death"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/flying_eye_attack_1.mp3" id="7_attack_sound"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/flying_eye_attack_2.mp3" id="8_attack_alt_sound"]
 
 [node name="FlyingEye" instance=ExtResource("1_base")]
 move_texture = ExtResource("2_move")
@@ -16,3 +18,5 @@ death_texture = ExtResource("6_death")
 move_speed = 155.0
 attack_range = 170.0
 uses_gravity = false
+attack_sound = ExtResource("7_attack_sound")
+attack_alt_sound = ExtResource("8_attack_alt_sound")

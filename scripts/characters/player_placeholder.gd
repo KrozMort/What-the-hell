@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const PLAYER_SPRITE_DIR := "res://assets/characters/player/main/spritesheets/"
-const FRAME_WIDTH := 60
+const FRAME_WIDTH := 120
 const FRAME_HEIGHT := 80
 const SPEED := 260.0
 const JUMP_VELOCITY := -520.0

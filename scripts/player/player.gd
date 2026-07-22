@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 signal health_changed(current_health: int, maximum_health: int)
 signal stamina_changed(current_stamina: float, maximum_stamina: float)
+signal died
 
 ## Estados de locomoción y combate disponibles para el personaje.
 enum State {
@@ -12,6 +13,7 @@ enum State {
 	FALL,
 	ATTACK,
 	DODGE,
+	DEATH,
 }
 
 const FRAME_SIZE := Vector2(120.0, 80.0)
@@ -32,6 +34,15 @@ const ATTACK_1_TEXTURE := preload("res://assets/characters/player/main/spriteshe
 const ATTACK_2_TEXTURE := preload("res://assets/characters/player/main/spritesheets/player_attack_2_stationary.png")
 const ATTACK_COMBO_TEXTURE := preload("res://assets/characters/player/main/spritesheets/player_attack_combo_stationary.png")
 const DODGE_TEXTURE := preload("res://assets/characters/player/main/spritesheets/player_roll.png")
+const DEATH_TEXTURE := preload("res://assets/characters/player/main/spritesheets/player_death_stationary.png")
+
+const JUMP_SOUND := preload("res://assets/audio/sfx/jump.mp3")
+const DODGE_SOUND := preload("res://assets/audio/sfx/dodge.mp3")
+const SWORD_1_SOUND := preload("res://assets/audio/sfx/sword_1.mp3")
+const SWORD_2_SOUND := preload("res://assets/audio/sfx/sword_2.mp3")
+const HURT_SOUND := preload("res://assets/audio/sfx/player_hurt.mp3")
+const DEATH_SOUND := preload("res://assets/audio/sfx/player_death.mp3")
+const SPECIAL_ATTACK_COMBO_DELAY := 0.18
 
 @export_category("Movimiento")
 @export var move_speed: float = 300.0
@@ -66,8 +77,12 @@ const DODGE_TEXTURE := preload("res://assets/characters/player/main/spritesheets
 @export var dodge_fps: float = 20.0
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var movement_sfx: AudioStreamPlayer = $MovementSfx
+@onready var combat_sfx: AudioStreamPlayer = $CombatSfx
+@onready var status_sfx: AudioStreamPlayer = $StatusSfx
 
 var current_state: State = State.IDLE
+var is_dead: bool = false
 var input_direction: float = 0.0
 var next_normal_attack_index: int = 0
 var dodge_direction: float = 1.0
@@ -93,16 +108,33 @@ func _ready() -> void:
 
 ## Punto de entrada para el daño enemigo; la esquiva lo bloquea por completo.
 func take_damage(amount: int) -> void:
-	if is_invulnerable or amount <= 0:
+	if is_invulnerable or amount <= 0 or is_dead:
 		return
 
 	current_health = maxi(current_health - amount, 0)
+	health_changed.emit(current_health, max_health)
+
+	if current_health == 0:
+		_die()
+		return
+
 	is_invulnerable = true
 	hurt_invulnerability_remaining = hurt_invulnerability_time
-	health_changed.emit(current_health, max_health)
 	animated_sprite.modulate = Color(1.0, 0.35, 0.35)
 	var recovery_tween := create_tween()
 	recovery_tween.tween_property(animated_sprite, "modulate", Color.WHITE, hurt_invulnerability_time)
+	_play_sound(status_sfx, HURT_SOUND)
+
+
+## Detiene todo control del jugador y reproduce la animación de muerte.
+func _die() -> void:
+	is_dead = true
+	is_invulnerable = true
+	current_state = State.DEATH
+	velocity.x = 0.0
+	animated_sprite.modulate = Color.WHITE
+	animated_sprite.play(&"Death")
+	_play_sound(status_sfx, DEATH_SOUND)
 
 
 func heal(amount: int) -> bool:
@@ -154,6 +186,7 @@ func _process_locomotion() -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 		_change_state(State.JUMP)
+		_play_sound(movement_sfx, JUMP_SOUND)
 		return
 
 	_change_state(_get_locomotion_state())
@@ -185,7 +218,7 @@ func _apply_gravity(delta: float) -> void:
 
 ## Reevalúa el suelo después de move_and_slide(), sin interrumpir un ataque.
 func _update_state_after_movement() -> void:
-	if current_state != State.ATTACK and current_state != State.DODGE:
+	if current_state != State.ATTACK and current_state != State.DODGE and current_state != State.DEATH:
 		_change_state(_get_locomotion_state())
 
 
@@ -210,6 +243,7 @@ func _start_normal_attack() -> void:
 	current_state = State.ATTACK
 	attack_has_dealt_damage = false
 	animated_sprite.play(NORMAL_ATTACK_ANIMATIONS[next_normal_attack_index])
+	_play_sound(combat_sfx, SWORD_1_SOUND if next_normal_attack_index == 0 else SWORD_2_SOUND)
 	next_normal_attack_index = (next_normal_attack_index + 1) % NORMAL_ATTACK_ANIMATIONS.size()
 
 
@@ -218,6 +252,10 @@ func _start_special_attack() -> void:
 	current_state = State.ATTACK
 	attack_has_dealt_damage = false
 	animated_sprite.play(SPECIAL_ATTACK_ANIMATION)
+	_play_sound(combat_sfx, SWORD_1_SOUND)
+	var combo_tween := create_tween()
+	combo_tween.tween_interval(SPECIAL_ATTACK_COMBO_DELAY)
+	combo_tween.tween_callback(_play_sound.bind(combat_sfx, SWORD_2_SOUND))
 
 
 ## Inicia una voltereta hacia la entrada actual o hacia donde mira el personaje.
@@ -233,10 +271,16 @@ func _start_dodge() -> void:
 	is_invulnerable = true
 	dodge_cooldown_remaining = dodge_cooldown
 	animated_sprite.play(&"Dodge")
+	_play_sound(movement_sfx, DODGE_SOUND)
 
 
 func _can_dodge() -> bool:
 	return is_zero_approx(dodge_cooldown_remaining) and current_stamina >= dodge_stamina_cost
+
+
+func _play_sound(player: AudioStreamPlayer, stream: AudioStream) -> void:
+	player.stream = stream
+	player.play()
 
 
 func _on_frame_changed() -> void:
@@ -258,6 +302,8 @@ func _on_animation_finished() -> void:
 		is_invulnerable = false
 		velocity.x = 0.0
 		_change_state(_get_locomotion_state())
+	elif current_state == State.DEATH:
+		died.emit()
 
 
 ## Daña solamente a los enemigos situados delante del personaje.
@@ -307,6 +353,7 @@ func _configure_existing_animations() -> void:
 	_add_animation(frames, &"Attack2", ATTACK_2_TEXTURE, 6, attack_fps, false)
 	_add_animation(frames, &"AttackCombo", ATTACK_COMBO_TEXTURE, 10, attack_fps, false)
 	_add_animation(frames, &"Dodge", DODGE_TEXTURE, 12, dodge_fps, false)
+	_add_animation(frames, &"Death", DEATH_TEXTURE, 10, attack_fps, false)
 	animated_sprite.sprite_frames = frames
 
 

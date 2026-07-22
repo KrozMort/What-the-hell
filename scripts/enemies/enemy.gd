@@ -41,7 +41,15 @@ const ATTACK_NAMES: Array[StringName] = [&"Attack1", &"Attack2"]
 @export var move_fps: float = 12.0
 @export var attack_fps: float = 12.0
 
+@export_category("Sonido")
+@export var attack_sound: AudioStream
+@export var attack_alt_sound: AudioStream
+@export var hurt_sound: AudioStream = preload("res://assets/audio/sfx/enemy_hurt.mp3")
+@export var death_sound: AudioStream = preload("res://assets/audio/sfx/enemy_death.mp3")
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var attack_sfx: AudioStreamPlayer = $AttackSfx
+@onready var status_sfx: AudioStreamPlayer = $StatusSfx
 
 var current_state: State = State.IDLE
 var target: Node2D
@@ -114,6 +122,7 @@ func _start_attack() -> void:
 	velocity.x = 0.0
 	attack_has_dealt_damage = false
 	animated_sprite.play(ATTACK_NAMES[next_attack_index])
+	_play_sound(attack_sfx, attack_sound if next_attack_index == 0 else attack_alt_sound)
 	next_attack_index = (next_attack_index + 1) % ATTACK_NAMES.size()
 
 
@@ -149,9 +158,11 @@ func take_damage(amount: int) -> void:
 		current_state = State.DEATH
 		death_animation_finished = false
 		animated_sprite.play(&"Death")
+		_play_sound(status_sfx, death_sound)
 	else:
 		current_state = State.HURT
 		animated_sprite.play(&"Hurt")
+		_play_sound(status_sfx, hurt_sound)
 
 
 func _on_frame_changed() -> void:
@@ -228,6 +239,13 @@ func _configure_animations() -> void:
 	_add_animation(frames, &"Hurt", hurt_texture, _get_frame_count(hurt_texture), attack_fps, false)
 	_add_animation(frames, &"Death", death_texture, _get_frame_count(death_texture), attack_fps, false)
 	animated_sprite.sprite_frames = frames
+
+
+func _play_sound(player: AudioStreamPlayer, stream: AudioStream) -> void:
+	if stream == null:
+		return
+	player.stream = stream
+	player.play()
 
 
 func _get_frame_count(texture: Texture2D) -> int:

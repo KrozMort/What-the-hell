@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" path="res://assets/characters/enemies/skeleton/attack_alt.png" id="5_attack_alt"]
 [ext_resource type="Texture2D" path="res://assets/characters/enemies/skeleton/hurt.png" id="6_hurt"]
 [ext_resource type="Texture2D" path="res://assets/characters/enemies/skeleton/death.png" id="7_death"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/skeleton_attack.mp3" id="8_attack_sound"]
 
 [node name="Skeleton" instance=ExtResource("1_base")]
 idle_texture = ExtResource("2_idle")
@@ -17,3 +18,5 @@ hurt_texture = ExtResource("6_hurt")
 death_texture = ExtResource("7_death")
 move_speed = 125.0
 attack_damage = 15
+attack_sound = ExtResource("8_attack_sound")
+attack_alt_sound = ExtResource("8_attack_sound")
