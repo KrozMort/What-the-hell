@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://dlecn65um332f"]
+
+[ext_resource type="Script" uid="uid://cprdgvjcd372h" path="res://scripts/story/capitulo_1.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cgaqhsj4pb2oo" path="res://assets/story/chapter_1_background.png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://ch3c5fprn3hpj" path="res://assets/ui/continue_button.png" id="3_btn"]
+[ext_resource type="FontFile" uid="uid://c42y8h71b4fr3" path="res://assets/fonts/aurusenthial_gothic_soft.ttf" id="4_font"]
+
+[node name="Capitulo1" type="Node2D" unique_id=869912763]
+script = ExtResource("1_script")
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=1821883457]
+layer = -10
+
+[node name="Image" type="TextureRect" parent="Background" unique_id=1959096524]
+offset_right = 1586.0
+offset_bottom = 898.0
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2146404346]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1563270285]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonTexture" type="TextureRect" parent="CanvasLayer/Control" unique_id=168119489]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -140.0
+offset_right = 180.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("3_btn")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="CanvasLayer/Control" unique_id=614842753]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -140.0
+offset_right = 180.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+flat = true
+
+[node name="Transition" type="CanvasLayer" parent="." unique_id=1132608584]
+layer = 20
+
+[node name="Fade" type="ColorRect" parent="Transition" unique_id=572315214]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ChapterTitle" type="Label" parent="Transition" unique_id=980472423]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.6, 1)
+theme_override_colors/font_shadow_color = Color(0.08, 0.02, 0.03, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 64
+text = "CAPÍTULO 1"
+horizontal_alignment = 1
+vertical_alignment = 1

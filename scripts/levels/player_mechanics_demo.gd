@@ -1,7 +1,7 @@
 extends Node2D
 
 const MAIN_MENU_SCENE := "res://scenes/backgrounds/mountain_dusk_auto_scroller.tscn"
-const NEXT_LEVEL_SCENE := "res://scenes/levels/level_01.tscn"
+const NEXT_LEVEL_SCENE := "res://scenes/story/capitulo_1.tscn"
 const BOSS_ONE_SCENE := preload("res://scenes/bosses/boss_1.tscn")
 const HEALTH_HEART_PICKUP_SCENE := preload("res://scenes/items/health_heart_pickup.tscn")
 const INSTRUCTIONS_VISIBLE_TIME := 3.0

@@ -124,6 +124,9 @@ motion_scale = Vector2(0, 0)
 position = Vector2(798, 436)
 scale = Vector2(2.1635, 2.1635)
 texture = ExtResource("1_sky")
+script = ExtResource("15_drift")
+amplitude = 14.0
+speed = 0.05
 
 [node name="GraveyardLayer" type="ParallaxLayer" parent="Parallax" unique_id=665662662]
 motion_scale = Vector2(0, 0)

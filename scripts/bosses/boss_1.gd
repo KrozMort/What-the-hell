@@ -15,7 +15,7 @@ enum State {
 }
 
 const FRAME_SIZE := Vector2(72.0, 72.0)
-const PHASE_HEALTH := [150, 200, 250]
+const PHASE_HEALTH := [100, 150, 200]
 const PHASE_SPEED := [95.0, 120.0, 150.0]
 const PHASE_DAMAGE := [15, 20, 25]
 
