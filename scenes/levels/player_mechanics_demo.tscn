@@ -1,0 +1,234 @@
+[gd_scene format=3 uid="uid://cu486sstu58bs"]
+
+[ext_resource type="Script" uid="uid://buyy4rsgnlf0r" path="res://scripts/levels/player_mechanics_demo.gd" id="1_level"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Texture2D" uid="uid://buw4hekrhym2d" path="res://assets/environments/mountain_dusk/layers/sky.png" id="3_sky"]
+[ext_resource type="Texture2D" uid="uid://b8yij6io7kdr" path="res://assets/environments/mountain_dusk/layers/far-clouds.png" id="4_far_clouds"]
+[ext_resource type="Texture2D" uid="uid://dpu8uiaq4mk5f" path="res://assets/environments/mountain_dusk/layers/far-mountains.png" id="5_far_mountains"]
+[ext_resource type="Texture2D" uid="uid://ckngn7xqxqo4l" path="res://assets/environments/mountain_dusk/layers/mountains.png" id="6_mountains"]
+[ext_resource type="Texture2D" uid="uid://bh1cqnf71sxfu" path="res://assets/environments/mountain_dusk/layers/trees.png" id="7_trees"]
+[ext_resource type="FontFile" uid="uid://c42y8h71b4fr3" path="res://assets/fonts/aurusenthial_gothic_soft.ttf" id="8_font"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/goblin.tscn" id="9_goblin"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/mushroom.tscn" id="10_mushroom"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/skeleton.tscn" id="11_skeleton"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/flying_eye.tscn" id="12_flying_eye"]
+[ext_resource type="Texture2D" path="res://assets/ui/health/1-Hearth_Bar_Outline.png" id="13_health_outline"]
+[ext_resource type="Texture2D" path="res://assets/ui/health/1-Hearth_Bar_Fill.png" id="14_health_fill"]
+[ext_resource type="Texture2D" path="res://assets/ui/health/2-Stamin_Bar_Outline.png" id="15_stamina_outline"]
+[ext_resource type="Texture2D" path="res://assets/ui/health/2-Stamin_Bar_Fill.png" id="16_stamina_fill"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(4200, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(40, 900)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gate"]
+size = Vector2(32, 900)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.055, 0.025, 0.09, 0.82)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.84, 0.55, 0.35, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="PlayerMechanicsDemo" type="Node2D" unique_id=1200316555]
+script = ExtResource("1_level")
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=621153175]
+layer = -10
+
+[node name="Sky" type="TextureRect" parent="Background" unique_id=1260591313]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("3_sky")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="FarClouds" type="TextureRect" parent="Background" unique_id=17472815]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("4_far_clouds")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="FarMountains" type="TextureRect" parent="Background" unique_id=1091777896]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("5_far_mountains")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Mountains" type="TextureRect" parent="Background" unique_id=127734525]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("6_mountains")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Trees" type="TextureRect" parent="Background" unique_id=1864784249]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("7_trees")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="FloorVisual" type="Polygon2D" parent="." unique_id=1011102892]
+color = Color(0.105, 0.035, 0.12, 1)
+polygon = PackedVector2Array(0, 740, 4200, 740, 4200, 900, 0, 900)
+
+[node name="FloorEdge" type="Line2D" parent="." unique_id=1472358015]
+points = PackedVector2Array(0, 740, 4200, 740)
+width = 6.0
+default_color = Color(0.78, 0.42, 0.27, 1)
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=253451469]
+position = Vector2(2100, 790)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1023700667]
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=203888373]
+position = Vector2(-20, 450)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=1783133081]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=792579326]
+position = Vector2(4220, 450)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=605350484]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="Player" parent="." unique_id=310024079 instance=ExtResource("2_player")]
+position = Vector2(800, 690)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1973693575]
+limit_left = 0
+limit_top = 0
+limit_right = 4200
+limit_bottom = 900
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+
+[node name="BossGate" type="StaticBody2D" parent="." unique_id=1112312000]
+position = Vector2(2450, 450)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossGate" unique_id=738585992]
+shape = SubResource("RectangleShape2D_gate")
+
+[node name="BossGateVisual" type="Line2D" parent="." unique_id=1027386036]
+points = PackedVector2Array(2450, 0, 2450, 740)
+width = 8.0
+default_color = Color(0.85, 0.15, 0.2, 0.8)
+
+[node name="Goblin" parent="." unique_id=1992952283 instance=ExtResource("9_goblin")]
+position = Vector2(1180, 690)
+
+[node name="Mushroom" parent="." unique_id=675654951 instance=ExtResource("10_mushroom")]
+position = Vector2(1420, 690)
+
+[node name="Skeleton" parent="." unique_id=840418635 instance=ExtResource("11_skeleton")]
+position = Vector2(280, 690)
+
+[node name="FlyingEye" parent="." unique_id=1913343304 instance=ExtResource("12_flying_eye")]
+position = Vector2(628, 419)
+
+[node name="Interface" type="CanvasLayer" parent="." unique_id=1863389708]
+
+[node name="Objective" type="Label" parent="Interface" unique_id=816158561]
+offset_left = 950.0
+offset_top = 36.0
+offset_right = 1560.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(1, 0.82, 0.42, 1)
+theme_override_colors/font_shadow_color = Color(0.08, 0.01, 0.03, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("8_font")
+theme_override_font_sizes/font_size = 22
+text = "OBJETIVO: Derrota a todos los enemigos"
+horizontal_alignment = 2
+
+[node name="Instructions" type="PanelContainer" parent="Interface" unique_id=137710501]
+offset_left = 430.0
+offset_top = 78.0
+offset_right = 1150.0
+offset_bottom = 232.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="Interface/Instructions" unique_id=1305046986]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 12
+
+[node name="Text" type="Label" parent="Interface/Instructions/Margin" unique_id=694290998]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.72, 1)
+theme_override_fonts/font = ExtResource("8_font")
+theme_override_font_sizes/font_size = 22
+text = "A / D o flechas: Caminar     ESPACIO: Saltar
+SHIFT: Esquivar
+CLIC IZQUIERDO: Ataque normal
+CLIC DERECHO: Poder especial     ESC: Volver"
+
+[node name="Hud" type="Control" parent="Interface" unique_id=1542982012]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 24.0
+offset_top = 14.0
+offset_right = 420.0
+offset_bottom = 188.0
+mouse_filter = 2
+
+[node name="Bars" type="VBoxContainer" parent="Interface/Hud" unique_id=1128937727]
+layout_mode = 1
+offset_right = 396.0
+offset_bottom = 176.0
+theme_override_constants/separation = 10
+
+[node name="HealthLabel" type="Label" parent="Interface/Hud/Bars" unique_id=178734756]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.92, 0.84, 1)
+theme_override_fonts/font = ExtResource("8_font")
+theme_override_font_sizes/font_size = 18
+text = "VIDA"
+
+[node name="HealthBar" type="TextureProgressBar" parent="Interface/Hud/Bars" unique_id=1699629937]
+custom_minimum_size = Vector2(370, 36)
+layout_mode = 2
+texture_under = ExtResource("13_health_outline")
+texture_progress = ExtResource("14_health_fill")
+nine_patch_stretch = true
+show_percentage = false
+max_value = 100.0
+value = 100.0
+
+[node name="StaminaLabel" type="Label" parent="Interface/Hud/Bars" unique_id=2028223926]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84, 0.94, 1, 1)
+theme_override_fonts/font = ExtResource("8_font")
+theme_override_font_sizes/font_size = 18
+text = "ESTAMINA"
+
+[node name="StaminaBar" type="TextureProgressBar" parent="Interface/Hud/Bars" unique_id=518056966]
+custom_minimum_size = Vector2(370, 36)
+layout_mode = 2
+texture_under = ExtResource("15_stamina_outline")
+texture_progress = ExtResource("16_stamina_fill")
+nine_patch_stretch = true
+show_percentage = false
+max_value = 100.0
+value = 100.0

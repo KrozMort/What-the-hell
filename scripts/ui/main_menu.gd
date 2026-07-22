@@ -1,5 +1,10 @@
 extends Node2D
 
+<<<<<<< HEAD
+=======
+const NEW_GAME_SCENE := "res://scenes/levels/player_mechanics_demo.tscn"
+
+>>>>>>> origin/main
 @onready var music: AudioStreamPlayer = $AudioStreamPlayer
 @onready var menu: VBoxContainer = $MainMenu/Root/Menu
 @onready var title: TextureRect = $MainMenu/Root/Menu/Title
@@ -61,8 +66,11 @@ func _process(delta: float) -> void:
 		option_image.pivot_offset = option_image.size * 0.5
 		option_image.scale = option_image.scale.lerp(target_scale, delta * 8.0)
 		option_image.modulate = Color(1.0, 1.0 if hovered else 0.96, 0.82 if hovered else warm_color, 1.0)
+<<<<<<< HEAD
 		button.pivot_offset = button.size * 0.5
 		button.scale = option_image.scale
+=======
+>>>>>>> origin/main
 
 
 func _apply_responsive_layout() -> void:
@@ -130,7 +138,11 @@ func _on_music_finished() -> void:
 
 
 func _on_new_game_pressed() -> void:
+<<<<<<< HEAD
 	get_tree().change_scene_to_file("res://scenes/cinematics/intro/intro_story.tscn")
+=======
+	get_tree().change_scene_to_file(NEW_GAME_SCENE)
+>>>>>>> origin/main
 
 
 func _on_chapter_pressed() -> void:

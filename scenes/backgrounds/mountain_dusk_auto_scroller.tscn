@@ -1,5 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://c3idsj77kmk8h"]
 
+<<<<<<< HEAD
 [ext_resource type="Texture2D" path="res://assets/environments/mountain_dusk/layers/sky.png" id="1_m6rvc"]
 [ext_resource type="Shader" path="res://shaders/backgrounds/mountain_dusk_auto_scroller.gdshader" id="2_s8vwb"]
 [ext_resource type="Texture2D" path="res://assets/environments/mountain_dusk/layers/far-clouds.png" id="3_hfew3"]
@@ -8,6 +9,16 @@
 [ext_resource type="Texture2D" path="res://assets/environments/mountain_dusk/layers/mountains.png" id="6_leaik"]
 [ext_resource type="Texture2D" path="res://assets/environments/mountain_dusk/layers/trees.png" id="7_f76io"]
 [ext_resource type="AudioStream" path="res://assets/audio/music/summer_nights.ogg" id="8_oxnix"]
+=======
+[ext_resource type="Texture2D" uid="uid://cidgla3oqkmoa" path="res://assets/environments/mountain_dusk/layers/sky.png" id="1_m6rvc"]
+[ext_resource type="Shader" path="res://shaders/backgrounds/mountain_dusk_auto_scroller.gdshader" id="2_s8vwb"]
+[ext_resource type="Texture2D" uid="uid://bbw3l7ns3qacb" path="res://assets/environments/mountain_dusk/layers/far-clouds.png" id="3_hfew3"]
+[ext_resource type="Texture2D" uid="uid://nei8g3fblyr7" path="res://assets/environments/mountain_dusk/layers/near-clouds.png" id="4_w07ck"]
+[ext_resource type="Texture2D" uid="uid://bcnsdxg457gf4" path="res://assets/environments/mountain_dusk/layers/far-mountains.png" id="5_f3q5h"]
+[ext_resource type="Texture2D" uid="uid://cub65x0y0ym76" path="res://assets/environments/mountain_dusk/layers/mountains.png" id="6_leaik"]
+[ext_resource type="Texture2D" uid="uid://dxjs1s2ge2yl0" path="res://assets/environments/mountain_dusk/layers/trees.png" id="7_f76io"]
+[ext_resource type="AudioStream" uid="uid://lfkxxo68r08r" path="res://assets/audio/music/summer_nights.ogg" id="8_oxnix"]
+>>>>>>> origin/main
 [ext_resource type="FontFile" path="res://assets/fonts/aurusenthial_gothic_soft.ttf" id="9_7imwn"]
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="10_4rniv"]
 [ext_resource type="Texture2D" path="res://assets/ui/what_the_hell_logo.png" id="11_xe5by"]
@@ -70,43 +81,73 @@ script = ExtResource("10_4rniv")
 
 [node name="BackFixedTuxture" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_sky")
+<<<<<<< HEAD
 offset_right = 1600.0
 offset_bottom = 900.0
+=======
+offset_right = 1920.0
+offset_bottom = 1080.0
+>>>>>>> origin/main
 texture = ExtResource("1_m6rvc")
 stretch_mode = 1
 
 [node name="TextureRectFarClouds" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_jv7m2")
+<<<<<<< HEAD
 offset_right = 1600.0
 offset_bottom = 900.0
+=======
+offset_right = 1920.0
+offset_bottom = 1080.0
+>>>>>>> origin/main
 texture = ExtResource("3_hfew3")
 stretch_mode = 1
 
 [node name="TextureRectNearClouds" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_qattk")
+<<<<<<< HEAD
 offset_right = 1600.0
 offset_bottom = 900.0
+=======
+offset_right = 1920.0
+offset_bottom = 1080.0
+>>>>>>> origin/main
 texture = ExtResource("4_w07ck")
 stretch_mode = 1
 
 [node name="TextureRectFarMountains" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_maog4")
+<<<<<<< HEAD
 offset_right = 1600.0
 offset_bottom = 900.0
+=======
+offset_right = 1920.0
+offset_bottom = 1080.0
+>>>>>>> origin/main
 texture = ExtResource("5_f3q5h")
 stretch_mode = 1
 
 [node name="TextureRectMountains" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_cpwus")
+<<<<<<< HEAD
 offset_right = 1600.0
 offset_bottom = 900.0
+=======
+offset_right = 1920.0
+offset_bottom = 1080.0
+>>>>>>> origin/main
 texture = ExtResource("6_leaik")
 stretch_mode = 1
 
 [node name="TextureRectTrees" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_vc8l8")
+<<<<<<< HEAD
 offset_right = 1600.0
 offset_bottom = 900.0
+=======
+offset_right = 1920.0
+offset_bottom = 1080.0
+>>>>>>> origin/main
 texture = ExtResource("7_f76io")
 stretch_mode = 1
 
@@ -131,7 +172,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+<<<<<<< HEAD
 mouse_filter = 2
+=======
+>>>>>>> origin/main
 color = Color(0.06, 0.035, 0.08, 0.24)
 
 [node name="Menu" type="VBoxContainer" parent="MainMenu/Root"]
@@ -214,7 +258,10 @@ offset_left = 8.4
 offset_top = 9.66
 offset_right = 411.6
 offset_bottom = 106.26
+<<<<<<< HEAD
 focus_mode = 0
+=======
+>>>>>>> origin/main
 text = ""
 flat = true
 
@@ -224,7 +271,10 @@ offset_left = 63.0
 offset_top = 130.41
 offset_right = 357.0
 offset_bottom = 227.01
+<<<<<<< HEAD
 focus_mode = 0
+=======
+>>>>>>> origin/main
 text = ""
 flat = true
 
@@ -234,7 +284,10 @@ offset_left = 58.8
 offset_top = 251.16
 offset_right = 361.2
 offset_bottom = 347.76
+<<<<<<< HEAD
 focus_mode = 0
+=======
+>>>>>>> origin/main
 text = ""
 flat = true
 
@@ -244,6 +297,9 @@ offset_left = 99.0
 offset_top = 362.25
 offset_right = 321.0
 offset_bottom = 478.17
+<<<<<<< HEAD
 focus_mode = 0
+=======
+>>>>>>> origin/main
 text = ""
 flat = true

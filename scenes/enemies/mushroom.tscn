@@ -1,0 +1,19 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/enemies/base_enemy.tscn" id="1_base"]
+[ext_resource type="Texture2D" path="res://assets/characters/enemies/mushroom/idle.png" id="2_idle"]
+[ext_resource type="Texture2D" path="res://assets/characters/enemies/mushroom/run.png" id="3_move"]
+[ext_resource type="Texture2D" path="res://assets/characters/enemies/mushroom/attack.png" id="4_attack"]
+[ext_resource type="Texture2D" path="res://assets/characters/enemies/mushroom/attack_alt.png" id="5_attack_alt"]
+[ext_resource type="Texture2D" path="res://assets/characters/enemies/mushroom/hurt.png" id="6_hurt"]
+[ext_resource type="Texture2D" path="res://assets/characters/enemies/mushroom/death.png" id="7_death"]
+
+[node name="Mushroom" instance=ExtResource("1_base")]
+idle_texture = ExtResource("2_idle")
+move_texture = ExtResource("3_move")
+attack_texture = ExtResource("4_attack")
+attack_alt_texture = ExtResource("5_attack_alt")
+hurt_texture = ExtResource("6_hurt")
+death_texture = ExtResource("7_death")
+move_speed = 105.0
+attack_damage = 12
